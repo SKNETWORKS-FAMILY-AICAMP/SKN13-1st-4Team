@@ -54,12 +54,18 @@ def select_company():
 # 구분선택: 
 def select_condition():
     st.title("조회하고 싶은 특약 사항 종류를 선택해주세요.")
-    st.button("자녀할인", on_click = lambda: go_to("자녀할인 페이지"))
-    st.button("블랙박스장착할인", on_click = lambda: go_to("블랙박스장착할인 페이지"))
-    st.button("마일리지(후정산형)할인", on_click = lambda: go_to("마일리지(후정산형)할인 페이지"))
-    st.button("차선이탈경고(방지)장치할인", on_click = lambda: go_to("차선이탈경고(방지)장치할인 페이지"))
-    st.button("고령자안전교육이수할인", on_click = lambda: go_to("고령자안전교육이수할인 페이지"))
-    st.button("서민(나눔)우대할인", on_click = lambda: go_to("서민(나눔)우대할인 페이지"))
+    st.button(f"자녀할인: {min_category[0]}% ~ {max_category[0]}%",
+               on_click = lambda: go_to("자녀할인 페이지"))
+    st.button(f"블랙박스장착할인: {min_category[1]}% ~ {max_category[1]}%",
+               on_click = lambda: go_to("블랙박스장착할인 페이지"))
+    st.button(f"마일리지(후정산형)할인: {min_category[2]}% ~ {max_category[2]}%", 
+              on_click = lambda: go_to("마일리지(후정산형)할인 페이지"))
+    st.button(f"차선이탈경고(방지)장치할인: {min_category[3]}% ~ {max_category[3]}%", 
+              on_click = lambda: go_to("차선이탈경고(방지)장치할인 페이지"))
+    st.button(f"고령자안전교육이수할인: {min_category[4]}% ~ {max_category[4]}%", 
+              on_click = lambda: go_to("고령자안전교육이수할인 페이지"))
+    st.button(f"서민(나눔)우대할인: {min_category[5]}% ~ {max_category[5]}%", 
+              on_click = lambda: go_to("서민(나눔)우대할인 페이지"))
 
 # 구분별: 6개
 def child_dc():
@@ -71,12 +77,12 @@ def blackbox_dc():
     st.title("블랙박스장착할인")
     st.write(f"할인율: {min_category[1]}% ~ {max_category[1]}%")
     for i in df['회사명'].unique():
-        st.button(i, on_click = lambda i=i: go_to(f"블랙박스_{i} 페이지"))
+        st.button(i, on_click = lambda i=i: go_to(f"블랙박스장착할인_{i} 페이지"))
 def mileage_dc():
     st.title("마일리지(후정산형)할인")
     st.write(f"할인율: {min_category[2]}% ~ {max_category[2]}%")
     for i in df['회사명'].unique():
-        st.button(i, on_click = lambda i=i: go_to(f"마일리지(후정산형)_{i} 페이지"))
+        st.button(i, on_click = lambda i=i: go_to(f"마일리지(후정산형)할인_{i} 페이지"))
 def ldws_dc():
     st.title("차선이탈경고(방지)장치할인")
     st.write(f"할인율: {min_category[3]}% ~ {max_category[3]}%")
@@ -110,6 +116,7 @@ def dynamic_detail_page():
             st.markdown(f"**가입조건**: {row.get('가입조건', '-')}")
             if "비고" in row:
                 st.markdown(f"**비고**: {row['비고']}")
+    st.dataframe(filtered_df)
 
 
 # 뒤로가기는 홈화면에선 보여주지 마세요.
