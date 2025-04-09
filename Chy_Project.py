@@ -64,53 +64,164 @@ def select_company():
         st.button("하나손해보험", on_click = lambda: go_to("하나손해보험 페이지"))
         st.button("캐롯손해보험", on_click = lambda: go_to("캐롯손해보험 페이지"))
 
+
+# 보험사 detail 파일 불러오기
+import pymysql
+import pandas as pd
+
+# DB 연결
+conn = pymysql.connect(
+    host='127.0.0.1',          # 또는 DB 주소
+    user='SKN13',
+    password='1111',
+    database='car_insurance',
+    charset='utf8mb4',         # 한글 깨짐 방지
+   # cursorclass=pymysql.cursors.DictCursor  # 딕셔너리 형태로 가져오기
+)
+
+# 쿼리 작성
+query = "SELECT * FROM car_number"
+
+# pandas로 DataFrame 불러오기
+insurance_detail = pd.read_sql(query, conn)
+
+# 대표번호 불러오기
+def number(int):
+    number = insurance_detail[['회사명', '대표번호']]
+    return number.iloc[int,1]
+
+# 상담센터 url 불러오기
+def consult(int):
+    url = insurance_detail[['상담센터', '민원창구']]
+    return url.iloc[int,0]
+
+# 민원창구 url 불러오기
+def complain(int):
+    url = insurance_detail[['상담센터', '민원창구']]
+    return url.iloc[int,1]
+
+
+
 # 보험사별: 삼성
 def samsung():
     st.title("삼성화재")
+    st.subheader("대표번호")
+    st.text(number(5))
+    st.subheader("상담센터")
+    st.link_button(consult(5), consult(5))
+    st.subheader("민원창구")
+    st.link_button(complain(5), complain(5))
+
 
 # 보험사별: 현대
 def hyundai():
     st.title("현대해상")
+    st.subheader("대표번호")
+    st.text(number(6))
+    st.subheader("상담센터")
+    st.link_button(consult(6), consult(6))
+    st.subheader("민원창구")
+    st.link_button(complain(6), complain(6)) 
 
 # 보험사별: DB
 def db_insu():
     st.title("DB손해보험")
+    st.subheader("대표번호")
+    st.text(number(8))
+    st.subheader("상담센터")
+    st.link_button(consult(8), consult(8))
+    st.subheader("민원창구")
+    st.link_button(complain(8), complain(8)) 
 
 # 보험사별: KB손보
 def kb_insu(): 
     st.title("KB손해보험")
+    st.subheader("대표번호")
+    st.text(number(7))
+    st.subheader("상담센터")
+    st.link_button(consult(7), consult(7))
+    st.subheader("민원창구")
+    st.link_button(complain(7), complain(7)) 
 
-# 보험사별: 메리츠화재
+# 보험사별: meritz
 def meritz():
-    st.title("메리츠화재")
+    st.title("메리츠화재보험")
+    st.subheader("대표번호")
+    st.text(number(0))
+    st.subheader("상담센터")
+    st.link_button(consult(0), consult(0))
+    st.subheader("민원창구")
+    st.link_button(complain(0), complain(0)) 
 
 # 보험사별: AXA손보
 def AXA():
     st.title("AXA손해보험")
+    st.subheader("대표번호")
+    st.text(number(9))
+    st.subheader("상담센터")
+    st.link_button(consult(9), consult(9))
+    st.subheader("민원창구")
+    st.link_button(complain(9), complain(9)) 
 
-# 보험사별: 한화손해보험
+# 보험사별: 한화
 def hanhwa():
     st.title("한화손해보험")
+    st.subheader("대표번호")
+    st.text(number(1))
+    st.subheader("상담센터")
+    st.link_button(consult(1), consult(1))
+    st.subheader("민원창구")
+    st.link_button(complain(1), complain(1)) 
 
-# 보험사별: 롯데손해보험
+# 보험사별: 롯데
 def lotte():
     st.title("롯데손해보험")
-
-# 보험사별: MG손해보험
+    st.subheader("대표번호")
+    st.text(number(2))
+    st.subheader("상담센터")
+    st.link_button(consult(2), consult(2))
+    st.subheader("민원창구")
+    st.link_button(complain(2), complain(2)) 
+    
+# 보험사별: MG
 def MG():
     st.title("MG손해보험")
+    st.subheader("대표번호")
+    st.text(number(3))
+    st.subheader("상담센터")
+    st.link_button(consult(3), consult(3))
+    st.subheader("민원창구")
+    st.link_button(complain(3), complain(3)) 
 
-# 보험사별: 흥국화재해상
+# 보험사별: 흥국
 def heungkuk():
-    st.title("흥국화재해상")
+    st.title("흥국화재손해보험")
+    st.subheader("대표번호")
+    st.text(number(8))
+    st.subheader("상담센터")
+    st.link_button(consult(8), consult(8))
+    st.subheader("민원창구")
+    st.link_button(complain(8), complain(8)) 
 
 # 보험사별: 하나손해보험
 def hana():
     st.title("하나손해보험")
+    st.subheader("대표번호")
+    st.text(number(10))
+    st.subheader("상담센터")
+    st.link_button(consult(10), consult(10))
+    st.subheader("민원창구")
+    st.link_button(complain(10), complain(10)) 
 
 # 보험사별: 캐롯손해보험
 def carrot():
     st.title("캐롯손해보험")
+    st.subheader("대표번호")
+    st.text(number(11))
+    st.subheader("상담센터")
+    st.link_button(consult(11), consult(11))
+    st.subheader("민원창구")
+    st.link_button(complain(11), complain(11)) 
 
 # 딕셔너리에 페이지와 함수 매핑
 pages = {
