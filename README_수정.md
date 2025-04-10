@@ -8,8 +8,26 @@ SK 네트웍스 AI과정 1차 프로젝트
 
 **👋🏻 팀원**:  
 
-| 박현아 | 안수민 | 우민규 | 이재범 | 최호연 |
-|--------|--------|--------|--------|--------|
+<table>
+  <tr>
+    <th>박현아</th>
+    <th>안수민</th>
+    <th>우민규</th>
+    <th>이재범</th>
+    <th>최호연</th>
+  </tr>  
+  <tr>
+    <td><img src="http://blogfiles.naver.net/MjAyNDExMDJfMjM2/MDAxNzMwNDc1Nzg5Nzc1.rfkJtpojlKvdRMAJqt30FS-mfZnmwCBHnnYpM7u3eKkg.C42Cv6wDDI7ayLFLw_F5DHiXiGzJWTHb7DGAG_BDl7wg.JPEG/IMG_8329.jpg", width = 100/></td>
+    <td><img src="http://blogfiles.naver.net/MjAyNTAzMTlfMjc1/MDAxNzQyMzQ1NzM3NTEx.jEDL5We-mBfJaDCjylBXcsYvYoOaQMOOuz1dRrWBbi4g.JLlgQM_-VN6gokP1r_596cD83ckZh4bllcKZv70KI3Eg.JPEG/IMG_2431.jpg", width = 100/></td>
+    <td><img src="http://blogfiles.naver.net/MjAyNDExMDFfMjY0/MDAxNzMwNDU5NjE3MTg2._ioeuo9Rn2TQOAvtGQsPemZWG3vhleVOe1RMacSE-3Mg.LcfuFKhZQNxgXz0vC3AE3ZnaN218H5xi17DxPN30kBUg.JPEG/output_961454524.jpg" width="100"></td>
+    <td><img src="http://blogfiles.naver.net/MjAyNDExMDNfMTA0/MDAxNzMwNjQwNDk5Mjgw.oJGAO8LWA-d6__xX5HIV6xy8LKsxO4WTZSIX8okI328g.bbEkrIy0RoHX2LQzFNEm8E1Rq0va1XR7eT7WYq5Ab7gg.JPEG/output_495323022.jpg" width="100">
+", width = 100/></td>
+    <td><img src="http://blogfiles.naver.net/MjAyNTAzMTRfNDIg/MDAxNzQxOTM1NzkzMDk4.qfERIXtA_8chsd3xe_zlSh08ynpP3X0fcyO3xL-aiVQg.y8qULkJ5EcfhrkURzj-H5Vj4X9eoLEf6VLfKaYWI4J4g.JPEG/IMG_2758.jpg" width="100">
+</td>
+  </tr>  
+</table>
+<!-- | 박현아 | 안수민 | 우민규 | 이재범 | 최호연 |
+|--------|--------|--------|--------|--------| -->
 
 --- 
 
@@ -59,6 +77,7 @@ SK 네트웍스 AI과정 1차 프로젝트
 | ------------------------- | ---------- | ---------- | ------------------------ | ---------------------- | 
 | 프로젝트 주제 선정        | 04-09      | 04-09      | ALL                      |                  | 
 | 자동차보험 특약 크롤링        | 04-09      | 04-09      | ALL                      | csv                   | 
+| 데이터 전처리        | 04-09      | 04-10      | 안수민, 우민규                      | csv                   | 
 | Streamlit 화면 설계        | 04-09      | 04-10      | 이재범, 최호연           | 설계파일, WEB 화면     | 
 | Streamlit-DB연동           | 04-09      | 04-09      | 이재범, 최호연                    | DB table               | 
 | 보험사 정보 수집        | 04-09      | 04-10      | ALL                      | csv       
@@ -132,7 +151,7 @@ SK 네트웍스 AI과정 1차 프로젝트
 
 
 ###  데이터베이스 (ERD)
-📌(ERD 사진)
+![car_ins_ERD](image.png)
 
 ---
 
