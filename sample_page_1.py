@@ -49,7 +49,7 @@ def samsung_button():
 
 # 홈
 def home():
-    st.title("자동차보험특약정보시스템")
+    st.title("자동차보험특별약관정보비교시스템")
     st.subheader("여러 회사의 자동차 보험 특별 약관을 종류별로 보여줍니다.")
 
     st.markdown("""
@@ -107,7 +107,10 @@ def select_condition():
 
 def child_dc():
     st.title(f"자녀할인: 총 {len(df[df['구분']=='자녀할인'])}개")
+    st.markdown("---")
     st.subheader(f"할인율: {min_category[0]}% ~ {max_category[0]}%")
+    st.write("자녀 연령과 운전 범위 제한(한정운전 특별약관) 조건에 따라 보험료를 할인받을 수 있습니다.")
+    st.markdown("---")
 
     right_col, center_col, left_col = st.columns(3)
     with right_col:
@@ -122,8 +125,11 @@ def child_dc():
 
 def blackbox_dc():
     st.title(f"블랙박스장치할인: 총 {len(df[df['구분']=='블랙박스장착할인'])}개")
+    st.markdown("---")
     st.subheader(f"할인율: {min_category[1]}% ~ {max_category[1]}%")
- 
+    st.write("블랙박스 장착 여부, 차령, 차종 조건에 따라 자동차 보험료를 할인받을 수 있습니다.")
+    st.markdown("---")
+
     right_col, center_col, left_col = st.columns(3)
     with right_col:
         for i in df['회사명'].unique()[:4]:
@@ -137,7 +143,10 @@ def blackbox_dc():
 
 def mileage_dc():
     st.title(f"마일리지(후정산형)할인: 총 {len(df[df['구분']=='마일리지(후정산형)할인'])}개")
+    st.markdown("---")
     st.subheader(f"할인율: {min_category[2]}% ~ {max_category[2]}%")
+    st.write("주행거리가 짧고, 차종, 보험기간, 주행거리 고지방식 등의 조건을 충족하면 보험료를 할인받을 수 있습니다.")
+    st.markdown("---")
 
     right_col, center_col, left_col = st.columns(3)
     with right_col:
@@ -152,7 +161,10 @@ def mileage_dc():
 
 def ldws_dc():
     st.title(f"차선이탈경고(방지)장치할인: 총 {len(df[df['구분']=='차선이탈경고(방지)장치할인'])}개")
+    st.markdown("---")
     st.subheader(f"할인율: {min_category[3]}% ~ {max_category[3]}%")
+    st.write("차선이탈경고 또는 방지 장치가 장착된 차량에 대해, 차령, 차종 조건을 고려하여 보험료가 할인됩니다.")
+    st.markdown("---")
 
     right_col, center_col, left_col = st.columns(3)
     with right_col:
@@ -167,7 +179,10 @@ def ldws_dc():
 
 def elderly_lecture_dc():
     st.title(f"고령자안전교육이수할인: 총 {len(df[df['구분']=='고령자안전교육이수할인'])}")
+    st.markdown("---")
     st.subheader(f"할인율: {min_category[4]}% ~ {max_category[4]}%")
+    st.write("만 65세 이상 고령 운전자가 도로교통공단의 교통안전교육을 수강하면, 자동차 보험료를 할인받을 수 있습니다.")
+    st.markdown("---")
 
     right_col, center_col, left_col = st.columns(3)
     with right_col:
@@ -182,7 +197,10 @@ def elderly_lecture_dc():
 
 def commoner_dc():
     st.title(f"서민(나눔)우대할인: 총 {len(df[df['구분']=='서민(나눔)우대할인'])}")
+    st.markdown("---")
     st.subheader(f"할인율: {min_category[5]}% ~ {max_category[5]}%")
+    st.write("경제적 여건이 어려운 기초생활수급자, 중증장애인, 저소득 다자녀 가정, 또는 장애인용 차량을 보유한 경우, 자동차 보험료 할인 혜택을 받을 수 있습니다.")
+    st.markdown("---")
 
     right_col, center_col, left_col = st.columns(3)
     with right_col:
@@ -204,6 +222,9 @@ def dynamic_detail_page():
     st.title(f"{category} - {company}")
 
     filtered_df = df[(df["구분"] == category) & (df["회사명"] == company)]
+    if filtered_df.empty:
+        st.warning(f"{company}의 {category}에 해당하는 특약 정보가 없습니다.")
+        return
     with st.expander("✅ 세부 정보 보기"):
         for idx, row in filtered_df.iterrows():
             st.markdown("---")
