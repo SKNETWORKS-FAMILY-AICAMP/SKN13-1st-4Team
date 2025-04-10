@@ -663,23 +663,18 @@ pages2 = {
 }
 
 # dymanic pages 72개를 위한 제한사항입니다.
-# if st.session_state.current_page in pages1:
-#     pages1[st.session_state.current_page]()
-# else:
-#     dynamic_detail_page1()
-
-# if st.session_state.current_page in pages2:
-#     pages2[st.session_state.current_page]()
-# else:
-#     dynamic_detail_page2()
-
 if st.session_state.current_page in pages1:
     pages1[st.session_state.current_page]()
 elif st.session_state.current_page in pages2:
     pages2[st.session_state.current_page]()
+elif "_" in st.session_state.current_page:  # 동적 세부 페이지: 구분_회사 or 회사_구분
+    # 구분이 앞에 오는 경우: 자녀할인_삼성화재
+    if st.session_state.current_page.split("_")[0] in df['구분'].unique():
+        dynamic_detail_page1()
+    else:  # 회사가 앞에 오는 경우: 삼성화재_자녀할인
+        dynamic_detail_page2()
 else:
-    dynamic_detail_page1()
-    dynamic_detail_page2()
+    st.error("해당 페이지를 찾을 수 없습니다.")
 
 # 그냥 커스텀어트리뷰트 current_page랑 history 실시간 조회.
 st.write(f"현재 페이지: {st.session_state.current_page}")
