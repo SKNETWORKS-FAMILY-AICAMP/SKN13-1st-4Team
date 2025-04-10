@@ -67,7 +67,7 @@
 | ------------------------- | ---------- | ---------- | ------------------------ | ---------------------- | 
 | 프로젝트 주제 선정        | 04-09      | 04-09      | ALL                      |                  | 
 | 자동차보험 특약 크롤링        | 04-09      | 04-09      | ALL                      | csv                   | 
-| Streamlit 화면 설계        | 04-09      | 04-09      | 이재범, 최호연           | 설계파일, WEB 화면     | 
+| Streamlit 화면 설계        | 04-09      | 04-10      | 이재범, 최호연           | 설계파일, WEB 화면     | 
 | Streamlit-DB연동           | 04-09      | 04-09      | 이재범, 최호연                    | DB table               | 
 | 보험사 정보 수집        | 04-09      | 04-10      | ALL                      | csv       
 | 데이터-DB연동              | 04-10      | 04-10      | 박현아, 안수민, 우민규   | ERD 다이어그램         | 
@@ -78,9 +78,33 @@
 
 
 ### 💻 주요 기술
-| **Streamlit** | **MySQL** | **Pandas** | **BeautifulSoup4** | **Selenium** |
-| -------------- | --------- | ---------- | ------------------ | ------------ |
-| ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) | ![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-000000?style=flat&logo=python&logoColor=white) | ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat&logo=selenium&logoColor=white) |
+>### <span style="color:white"> 구현</span>
+<table>
+  <tr>
+    <td><img src="https://img.shields.io/badge/VScode-007ACC?style=for-the-badge&logo=Vscode&logoColor=white"/></td>
+    <td><img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/></td>
+    <td><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"/></td>
+  </tr>  
+</table>
+
+>### <span style="color:white"> 페이지 설정 </span>
+<table>
+  <tr>
+    <td><img src="https://img.shields.io/badge/-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/></td>
+  </tr>
+</table>
+
+>### <span style="color:white"> 데이터 수집 및 처리 </span>
+<table>
+  <tr>
+    <td><img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"/></td>
+    <td><img src="https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white"/></td>
+    <td><img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"/></td>
+    <td><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/></td>
+  </tr>
+</table>
+<br>
+</br>
 
 ##  주요 기능
 
@@ -127,19 +151,21 @@
 
 
 📌
-|**RQ-ID**|회원명|요구사항명|요구사항 내용|날짜|
+|**RQ-ID**|분류|요구사항명|요구사항 내용|날짜|
 |------|---|---|---|---|
-|RQ-01|공통|DB 수집|시스템은 국내 12개사의 특약명, 가입조건, 판매채널, 할인율 등을 포함한 데이터를 수집한다.|04/09|
-|RQ-02|공통|DB 서버 구축|시스템은 수집된 데이터를 DB 서버에 등록한다.|04/09|
-|RQ-03|공통|Streamlit - 페이지|Streamlit 화면 구성 : 홈 화면, 보험사별 특약 구분 페이지, 특약 유형별 구분 페이지를 구축한다. |04/09|
-|RQ-04|공통|Streamlit - 페이지|홈 화면 구축 : 보험사별 혹인 특약 유형별 특약 구분 선택 정보를 제공한다.|04/09|
-<!-- |RQ-05|공통|Streamlit - 페이지|등록현황 화면 구축 : 시스템은 자동차 등록현환 데이터를 불러와서 친환경 자동차에 대한 내용을 시각화 한다.|04/09|
-|RQ-06|공통|Streamlit - 페이지|차량수요 화면 구축 : 시스템은 프로젝트 개요 및 간략화 된 정보를 제공한다.|04/09|
-|RQ-07|공통|Streamlit - 페이지|메뉴바 생성 : 사용자는 좌측의 메뉴바를 통해 각 페이지에 접근할 수 있다.|04/09|
-|RQ-08|공통|등록현황 시각화|시스템은 지도 기반 지역별 등록 현황 및 막대 그래프를 통해 연료별 등록현을 제공한다.|04/10|
-|RQ-09|공통|수요현황 시각화|시스템은 월별 수요 데이터에 대한 파이 그래프를 통해 제공한다.|04/10|
-|RQ-10|공통|Filter 기능|사용자는 키워드 검색을 통해 FAQ에 접근할 수 있다.  사용자는 브랜드 선택을 통해 FAQ에 접근할 수 있다. 사용자는 카테고리 선택을 통해 FAQ에 접근할 수 있다.|04/10|
-|RQ-11|공통|통합 FAQ 기능|시스템은 국내 5개사의 통합 데이터를 제공한다.|04/10| -->
+|RQ-01|DB|데이터 수집|국내 11개사의 특약명, 가입조건, 판매채널, 할인율 등을 포함한 데이터를 수집한다.|04/09|
+|RQ-02|DB|DB 구축|수집한 데이터를 DB에 등록한다.|04/09|
+|------|---|---|---|---|
+|RQ-HOME-01|메인 페이지|화면 구축|보험사별 특약 구분 페이지, 특약 유형별 구분 페이지로 이동할 수 있는 버튼을 구축한다.|04/09|
+|------|---|---|---|---|
+|RQ-INS-01|특약 유형별 구분 페이지|화면 구축|특약 유형 -> 회사 순서로 특약 정보를 조회하는 페이지를 구축한다.|04/09|
+|RQ-INS-02|특약 유형별 구분 페이지|네이버 포스트 불러오기|키워드를 입력하면 네이버 포스트를 불러오는 기능을 구축한다.|04/10|
+|------|---|---|---|---|
+|RQ-COM-01|보험사별 특약 구분 페이지|화면 구축|회사 -> 특약 유형 순서로 정보를 조회하는 페이지를 구축한다.|04/09|
+|RQ-COM-02|보험사별 특약 구분 페이지|네이버 포스트 불러오기|키워드를 입력하면 네이버 포스트를 불러오는 기능을 구축한다.|04/10|
+
+
+
 
 
 ###  프로젝트 수행 결과
