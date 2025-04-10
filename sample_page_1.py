@@ -1,5 +1,12 @@
 import streamlit as st
 import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import random
+import time
 
 # 1. 초기 로그 설정
 if "current_page" not in st.session_state:
@@ -10,15 +17,15 @@ if "history" not in st.session_state:
 # 2. 필요한 데이터 집계
 
 # 데이터프레임 불러오기
-df = pd.read_csv("https://raw.githubusercontent.com/SKNETWORKS-FAMILY-AICAMP/SKN13-1st-4Team/refs/heads/database/DB/car_ins.csv")
+df = pd.read_csv("car_ins_after_prepro.csv")
 
 # 할인율 범위로 보여줘야 되니까 최댓값 최솟값 모으기기
 min_category = []
 max_category = []
 
 for category in df['구분'].unique():
-    min_value = df[df["구분"] == category]['할인율(%)ascdesc'].min()
-    max_value = df[df["구분"] == category]['할인율(%)ascdesc'].max()
+    min_value = df[df["구분"] == category]['할인율(%)'].min()
+    max_value = df[df["구분"] == category]['할인율(%)'].max()
     min_category.append(min_value)
     max_category.append(max_value)
 
@@ -34,21 +41,11 @@ def go_back()   -> None:
     if st.session_state.current_page != "home":
         st.session_state.current_page = st.session_state.history.pop()    
 
-# 함수: 이미지 to URL 버튼 구현 $$$샘플입니다.$$$
-# 일단 이미지는 삼성 로고랑, ULR은 네이버 도메인으로 임의로 설정했어요. 기호에 맞게 사용하면 되려나..?
-def samsung_button():
-    st.markdown("""
-        <a href="https://www.naver.com" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/512px-Samsung_Logo.svg.png"
-                 alt="삼성화재"
-                 style="width:200px; height:auto; margin: 10px 0;">
-        </a>
-    """, unsafe_allow_html=True)
-
 # 함수: 페이지 구현
 
 # 홈
 def home():
+
     st.title("자동차보험특별약관정보비교시스템")
     st.subheader("여러 회사의 자동차 보험 특별 약관을 종류별로 보여줍니다.")
 
@@ -79,8 +76,6 @@ def home():
     with right_col:
         st.button("보험사별 조회", on_click = lambda: go_to("보험사별 페이지"))
         st.caption("예) DB손해보험, 삼성화재")
-
-    samsung_button()
 
 # 보험사선택: 
 def select_company():
@@ -213,6 +208,37 @@ def commoner_dc():
         for i in df['회사명'].unique()[8:]:
             st.button(i, on_click = lambda i=i: go_to(f"서민(나눔)우대할인_{i} 페이지"))
 
+# 함수: 네이버 블로그 세 개 긁어오기
+def get_top_three_reviews(query):
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    )
+
+    driver = webdriver.Chrome(options=options)
+
+    url = f"https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query={query}"
+    driver.get(url)
+
+    try:                # 10초 간 대기
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a.title_link"))
+        )
+        time.sleep(random.uniform(1.5, 2.5)) 
+    except:
+        print("❌ 블로그 후기 요소가 나타나지 않았습니다.")
+        driver.quit()
+        return []
+    
+    elements = driver.find_elements(By.CSS_SELECTOR, "a.title_link")
+    links = [el.get_attribute("href") for el in elements[:3]]
+
+    driver.quit()
+    return links
+
 # 이제 6 * 12 = 72개의 하위 페이지 함수를 만들면 되겠군요....!
 def dynamic_detail_page():
     page_name = st.session_state.current_page
@@ -229,19 +255,30 @@ def dynamic_detail_page():
         for idx, row in filtered_df.iterrows():
             st.markdown("---")
             st.markdown(f"**특약명**: {row.get('특약명', '-')}")
-            st.markdown(f"**할인율**: {row['할인율(%)ascdesc']}%")
+            st.markdown(f"**할인율**: {row['할인율(%)']}%")
             st.markdown(f"**가입조건**: {row.get('가입조건', '-')}")
             if "비고" in row:
                 st.markdown(f"**비고**: {row['비고']}")
-    st.dataframe(filtered_df)
+    # st.dataframe(filtered_df)
 
+    st.markdown("---")
+    st.header("📌 보험 관련 포스트 검색")
+    user_query = st.text_input(f"{company} 자동차보험의 {category}형 특약에 대해 검색합니다. 키워드를 입력해주세요",
+                               placeholder = "예) 후기, 비교, 환급 등")
+    search_query = f'"{company}" "{category}" {user_query.strip()}'
+    review_links = get_top_three_reviews(search_query)       # 블로그 URL 리스트
+
+    # 리스트 출력
+    for i, url in enumerate(review_links, 1):
+        st.markdown(f"🔗 {i}: [블로그 보러 가기]({url})")
+    
 
 # 뒤로가기는 홈화면에선 보여주지 마세요.
 if st.session_state.current_page != "home":
     st.button("⬅️ 뒤로가기", on_click=go_back)
 
 # 딕셔너리에 페이지와 함수 매핑
-pages = {
+pages1 = {
     "home":home,
     "구분별 페이지": select_condition,
     "보험사별 페이지": select_company,
@@ -254,12 +291,11 @@ pages = {
 }
 
 # dymanic pages 72개를 위한 제한사항입니다.
-if st.session_state.current_page in pages:
-    pages[st.session_state.current_page]()
+if st.session_state.current_page in pages1:
+    pages1[st.session_state.current_page]()
 else:
     dynamic_detail_page()
 
 # 그냥 커스텀어트리뷰트 current_page랑 history 실시간 조회.
 st.write(f"현재 페이지: {st.session_state.current_page}")
 st.write(f"페이지 로그 스택 방식으로 저장한 거 보여줄게요: {st.session_state.history}")
-
