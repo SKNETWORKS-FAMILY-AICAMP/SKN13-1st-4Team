@@ -217,4 +217,13 @@ SK 네트웍스 AI과정 1차 프로젝트
 
 - **최호연**:  
   첫 미니 프로젝트 경험을 좋은 팀원들과 함께하여 크롤링부터 streamlit까지 모두 잘 활용해본 것 같습니다. 어려운 내용이라고 생각했지만 같이 고민하고 정말 많이 도와준 팀원들 덕분에 잘 마무리한 것 같습니다. 감사합니다 !!
-  
+
+### References
+
+[1] `com_img.ipynb` 자동차 로고 이미지 크롤링 출처: [손해보험협회](https://carinfo.knia.or.kr/lmxsrv/cnswc/icnyCnswcList.do)
+
+[2] `car_ins_com_crawling.ipynb` 보험사 정보 크롤링 출처: [손해보험협회](https://carinfo.knia.or.kr/lmxsrv/cnswc/icnyCnswcList.do)
+
+[3] `car_ins_crawling.ipynb` 보험사 별 특수 약관 데이터 크롤링 출처: [손해보험협회](https://kpub.knia.or.kr/carInsuranceDisc/specialTerms/specialTerms.do)
+
+[4] `SKN13_1st_4Team.py` 메인 스크립트 내 블로그 포스트 실시간 크롤링 출처: [네이버](https://www.naver.com)
