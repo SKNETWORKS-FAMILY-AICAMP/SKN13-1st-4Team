@@ -184,19 +184,19 @@ SK 네트웍스 AI과정 1차 프로젝트
 ###  프로젝트 수행 결과
 
 #### 🏠 Home
-![home1](images_md\home1.png)
+![home1](images_md/home1.png)
 
 #### 🏢 보험사별 할인 특별 약관 정리
-![home1](images_md\보험사1.png)
-![home1](images_md\보험사2.png)
-![home1](images_md\보험사3.png)
-![home1](images_md\보험사4.png)
+![home1](images_md/보험사1.png)
+![home1](images_md/보험사2.png)
+![home1](images_md/보험사3.png)
+![home1](images_md/보험사4.png)
 
 #### 📊 할인 특별 약관별 정리
-![home1](images_md\특약1.png)
-![home1](images_md\특약2.png)
-![home1](images_md\특약3.png)
-![home1](images_md\특약4.png)
+![home1](images_md/특약1.png)
+![home1](images_md/특약2.png)
+![home1](images_md/특약3.png)
+![home1](images_md/특약4.png)
 
 
 ---
