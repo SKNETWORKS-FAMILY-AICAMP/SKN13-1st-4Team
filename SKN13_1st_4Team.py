@@ -97,15 +97,15 @@ def select_company():
         st.button("현대해상화재보험", on_click = lambda: go_to("현대해상화재보험 페이지"))
         st.caption(f"현대해상: {min_company[6]}% ~ {max_company[6]}%")
         st.button("DB손해보험", on_click = lambda: go_to("DB손해보험 페이지"))
-        st.caption(f"DB손해보험: {min_company[9]}% ~ {max_company[9]}%")
+        st.caption(f"DB손해보험: {min_company[8]}% ~ {max_company[8]}%")
         st.button("KB손해보험", on_click = lambda: go_to("KB손해보험 페이지"))
         st.caption(f"KB손해보험: {min_company[7]}% ~ {max_company[7]}%") 
-        
-    with col2:    
+
+    with col2:
         st.button("메리츠화재보험", on_click = lambda: go_to("메리츠화재보험 페이지"))
         st.caption(f"메리츠화재보험: {min_company[0]}% ~ {max_company[0]}%") 
         st.button("AXA손해보험", on_click = lambda: go_to("AXA손해보험 페이지"))
-        st.caption(f"AXA손해보험: {min_company[8]}% ~ {max_company[8]}%")
+        st.caption(f"AXA손해보험: {min_company[9]}% ~ {max_company[9]}%")
         st.button("한화손해보험", on_click = lambda: go_to("한화손해보험 페이지"))
         st.caption(f"한화손해보험: {min_company[1]}% ~ {max_company[1]}%") 
         st.button("롯데손해보험", on_click = lambda: go_to("롯데손해보험 페이지"))
@@ -117,10 +117,9 @@ def select_company():
         st.button("흥국화재해상", on_click = lambda: go_to("흥국화재해상보험 페이지"))
         st.caption(f"흥국화재해상: {min_company[4]}% ~ {max_company[4]}%")
         st.button("하나손해보험", on_click = lambda: go_to("하나손해보험 페이지"))
-        st.caption(f"하나손해보험: {min_company[8]}% ~ {max_company[8]}%")
+        st.caption(f"하나손해보험: {min_company[10]}% ~ {max_company[10]}%")
         st.button("캐롯손해보험", on_click = lambda: go_to("캐롯손해보험 페이지"))
         st.caption(f"캐롯손해보험: {min_company[11]}% ~ {max_company[11]}%")
-
 # 대표번호 불러오기
 def number(int):
     number = insurance_detail[['회사명', '대표번호']]
@@ -491,7 +490,7 @@ def ldws_dc():
             st.button(i, on_click = lambda i=i: go_to(f"차선이탈경고(방지)장치할인_{i} 페이지"))
 
 def elderly_lecture_dc():
-    st.title(f"고령자안전교육이수할인: 총 {len(df[df['구분']=='고령자안전교육이수할인'])}")
+    st.title(f"고령자안전교육이수할인: 총 {len(df[df['구분']=='고령자안전교육이수할인'])}개")
     st.markdown("---")
     st.subheader(f"할인율: {min_category[4]}% ~ {max_category[4]}%")
     st.write("만 65세 이상 고령 운전자가 도로교통공단의 교통안전교육을 수강하면, 자동차 보험료를 할인받을 수 있습니다.")
@@ -575,8 +574,10 @@ def dynamic_detail_page1():
         st.header("📌 보험 관련 포스트 검색")
         user_query = st.text_input(f"{company} 자동차보험의 {category}형 특약에 대해 검색합니다. 키워드를 입력해주세요",
                                placeholder = "예) 후기, 비교, 환급 등")
-        search_query = f'"{company}" "{category}" {user_query.strip()}'
-        review_links = get_top_three_reviews(search_query)       # 블로그 URL 리스트
+        if user_query.strip():
+            search_query = f'"{company}" "{category}" {user_query.strip()}'
+            review_links = get_top_three_reviews(search_query)       # 블로그 URL 리스트
+
 
         # 리스트 출력
         for i, url in enumerate(review_links, 1):
@@ -630,8 +631,9 @@ def dynamic_detail_page2():
         st.header("📌 보험 관련 포스트 검색")
         user_query = st.text_input(f"{company} 자동차보험의 {category}형 특약에 대해 검색합니다. 키워드를 입력해주세요",
                                placeholder = "예) 후기, 비교, 환급 등")
-        search_query = f'"{company}" "{category}" {user_query.strip()}'
-        review_links = get_top_three_reviews(search_query)       # 블로그 URL 리스트
+        if user_query.srtip():
+            search_query = f'"{company}" "{category}" {user_query.strip()}'
+            review_links = get_top_three_reviews(search_query)       # 블로그 URL 리스트
 
         # 리스트 출력
         for i, url in enumerate(review_links, 1):
