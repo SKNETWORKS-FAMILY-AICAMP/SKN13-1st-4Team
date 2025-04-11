@@ -564,6 +564,7 @@ def dynamic_detail_page1():
     category, company = page_name.replace(" 페이지", "").split("_")
 
     st.title(f"{category} - {company}")
+    
 
     filtered_df = df[(df["구분"] == category) & (df["회사명"] == company)]
     if filtered_df.empty:
@@ -582,7 +583,14 @@ def dynamic_detail_page1():
             st.markdown(f"🔗 {i}: [블로그 보러 가기]({url})")
         
         return
+    
     else:
+        discount_rate = filtered_df.iloc[:,-1]
+        st.write(f"총 {len(discount_rate)}개")
+        if len(filtered_df) == 1:
+            st.write(f"할인율: {list(discount_rate).pop()}%") 
+        else:    
+            st.write(f"할인율: {min(discount_rate)} ~ {max(discount_rate)}%")
         with st.expander("✅ 세부 정보 보기"):
             for idx, row in filtered_df.iterrows():
                 st.markdown("---")
@@ -597,12 +605,13 @@ def dynamic_detail_page1():
     st.header("📌 보험 관련 포스트 검색")
     user_query = st.text_input(f"{company} 자동차보험의 {category}형 특약에 대해 검색합니다. 키워드를 입력해주세요",
                                placeholder = "예) 후기, 비교, 환급 등")
-    search_query = f'"{company}" "{category}" {user_query.strip()}'
-    review_links = get_top_three_reviews(search_query)       # 블로그 URL 리스트
+    if user_query.strip():
+        search_query = f'"{company}" "{category}" "{user_query.strip()}"'
+        review_links = get_top_three_reviews(search_query)      # 블로그 URL 리스트
 
     # 리스트 출력
-    for i, url in enumerate(review_links, 1):
-        st.markdown(f"🔗 {i}: [블로그 보러 가기]({url})")
+        for i, url in enumerate(review_links, 1):
+            st.markdown(f"🔗 {i}: [블로그 보러 가기]({url})")
     
 def dynamic_detail_page2():
     page_name = st.session_state.current_page
@@ -632,7 +641,10 @@ def dynamic_detail_page2():
         
     discount_rate = filtered_df.iloc[:,-1]
     st.write(f"총 {len(discount_rate)}개")
-    st.write(f"할인율: {min(discount_rate)} ~ {max(discount_rate)}%")
+    if len(filtered_df) == 1:
+        st.write(f"할인율: {list(discount_rate).pop()}%") 
+    else:    
+        st.write(f"할인율: {min(discount_rate)} ~ {max(discount_rate)}%")
     if category == '자녀할인':
         st.write("자녀 연령과 운전 범위 제한(한정운전 특별약관) 조건에 따라 보험료를 할인받을 수 있습니다.")
     elif category == '블랙박스장착할인':
@@ -664,16 +676,13 @@ def dynamic_detail_page2():
     user_query = st.text_input(f"{company} 자동차보험의 {category}형 특약에 대해 검색합니다. 키워드를 입력해주세요",
                                placeholder = "예) 후기, 비교, 환급 등")
     
-    search_query = f'"{company}" "{category}" {user_query.strip()}'
-
-    review_links = get_top_three_reviews(search_query)   
-    # st.dataframe(filtered_df) # dataframe 보여주기
-    # 블로그 URL 리스트
-
+    if user_query.strip():
+        search_query = f'"{company}" "{category}" "{user_query.strip()}"'
+        review_links = get_top_three_reviews(search_query)      # 블로그 URL 리스트
 
     # 리스트 출력
-    for i, url in enumerate(review_links, 1):
-        st.markdown(f"🔗 {i}: [블로그 보러 가기]({url})")
+        for i, url in enumerate(review_links, 1):
+            st.markdown(f"🔗 {i}: [블로그 보러 가기]({url})")
 
 # 뒤로가기는 홈화면에선 보여주지 마세요.
 if st.session_state.current_page != "home":
