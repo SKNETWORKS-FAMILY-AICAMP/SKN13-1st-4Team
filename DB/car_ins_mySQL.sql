@@ -3,6 +3,7 @@ use car_insurance;
 select * from car_ins_com;	-- 자동차 보험 회사 정보, 총 12 row
 select * from car_ins; 		-- 자동차 보험 할인 특약 정보, 총 431 row
 
+select count(*) from car_ins;
 
 #### car_ins_com 회사명 전처리 // Parent 12개의 row 처리
 update	car_ins_com 
@@ -60,3 +61,14 @@ alter table car_ins modify 회사명 varchar(10);
 
 alter table car_ins add constraint car_ins_fk foreign key (회사명) references car_ins_com(회사명);
 ####
+
+#### 컬럼명 할인율(%)acsdesc -> 할인율(%)로 변경
+ALTER TABLE car_ins
+CHANGE `할인율(%)ascdesc` `할인율(%)` DOUBLE;
+#### 컬럼명 적용담보 변경
+ALTER TABLE car_ins
+CHANGE `적용담보(자동차상해 및담보별 확장특약 포함기준)` `적용담보` text;
+
+DESCRIBE car_ins_com;
+
+
