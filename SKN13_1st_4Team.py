@@ -769,5 +769,5 @@ else:
     st.error("해당 페이지를 찾을 수 없습니다.")
 
 # 그냥 커스텀어트리뷰트 current_page랑 history 실시간 조회.
-st.write(f"현재 페이지: {st.session_state.current_page}")
-st.write(f"페이지 로그 스택 방식으로 저장한 거 보여줄게요: {st.session_state.history}")
+# st.write(f"현재 페이지: {st.session_state.current_page}")
+# st.write(f"페이지 로그 스택 방식으로 저장한 거 보여줄게요: {st.session_state.history}")
