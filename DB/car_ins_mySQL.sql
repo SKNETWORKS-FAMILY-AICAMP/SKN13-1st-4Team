@@ -49,6 +49,18 @@ set 가입조건 = replace(가입조건, ' 다음의 조건 ①~④ 중 하나�
 where 가입조건 like '%다음의%';
 ####
 
+update	car_ins
+set		가입조건 = replace(가입조건, '~', '-')
+where	가입조건 like '%~%';
+
+#### 컬럼명 할인율(%)acsdesc -> 할인율(%)로 변경
+ALTER TABLE car_ins
+CHANGE `할인율(%)ascdesc` `할인율(%)` DOUBLE;
+#### 컬럼명 적용담보 변경
+ALTER TABLE car_ins
+CHANGE `적용담보(자동차상해 및담보별 확장특약 포함기준)` `적용담보` text;
+####
+
 
 #### my sql에서는 blob 또는 text type의 길이를 정해주지 않으면 컬럼을 pk로 등록하지 못함.
 #### type 변경 후  pk로 등록 
@@ -62,13 +74,5 @@ alter table car_ins modify 회사명 varchar(10);
 alter table car_ins add constraint car_ins_fk foreign key (회사명) references car_ins_com(회사명);
 ####
 
-#### 컬럼명 할인율(%)acsdesc -> 할인율(%)로 변경
-ALTER TABLE car_ins
-CHANGE `할인율(%)ascdesc` `할인율(%)` DOUBLE;
-#### 컬럼명 적용담보 변경
-ALTER TABLE car_ins
-CHANGE `적용담보(자동차상해 및담보별 확장특약 포함기준)` `적용담보` text;
-
-DESCRIBE car_ins_com;
 
 
